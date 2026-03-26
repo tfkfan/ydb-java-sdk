@@ -10,7 +10,7 @@ public class InitResult {
         this.seqNo = seqNo;
     }
 
-    public long getSeqNo() {
+    private long getSeqNo() {
         return seqNo;
     }
 }

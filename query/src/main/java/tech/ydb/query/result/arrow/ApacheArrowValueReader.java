@@ -62,7 +62,7 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         return new IllegalStateException("cannot call " + method + ", actual type: " + getType());
     }
 
-    protected abstract ApacheArrowValueReader<T> toNotNull();
+    //private abstract ApacheArrowValueReader<T> toNotNull();
     protected abstract Value<?> getNotNullValue();
     protected abstract String getNotNullValueAsString();
 
@@ -102,9 +102,9 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         if (vector.isNull(rowIndex)) {
             return null;
         }
-        ApacheArrowValueReader<T> notNull = toNotNull();
-        notNull.setRowIndex(rowIndex);
-        return notNull;
+        //ApacheArrowValueReader<T> notNull = toNotNull();
+        //notNull.setRowIndex(rowIndex);
+        return null;
     }
 
     @Override
@@ -381,11 +381,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected UInt1VectorReader toNotNull() {
-            return new UInt1VectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Bool) {
                 return String.valueOf(getBool());
@@ -430,10 +425,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
             throw error("getValue");
         }
 
-        @Override
-        protected UInt2VectorReader toNotNull() {
-            return new UInt2VectorReader(vector, type, false);
-        }
 
         @Override
         public String getNotNullValueAsString() {
@@ -478,11 +469,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newUint32(vector.get(rowIndex));
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected UInt4VectorReader toNotNull() {
-            return new UInt4VectorReader(vector, type, false);
         }
 
         @Override
@@ -533,11 +519,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected UInt8VectorReader toNotNull() {
-            return new UInt8VectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Uint64) {
                 return Long.toUnsignedString(getUint64());
@@ -571,11 +552,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected TinyIntVectorReader toNotNull() {
-            return new TinyIntVectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Int8) {
                 return String.valueOf(getInt8());
@@ -603,11 +579,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newInt16(vector.get(rowIndex));
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected SmallIntVectorReader toNotNull() {
-            return new SmallIntVectorReader(vector, type, false);
         }
 
         @Override
@@ -649,11 +620,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newDate32(vector.get(rowIndex));
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected IntVectorReader toNotNull() {
-            return new IntVectorReader(vector, type, false);
         }
 
         @Override
@@ -737,11 +703,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected BigIntVectorReader toNotNull() {
-            return new BigIntVectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Int64) {
                 return String.valueOf(vector.get(rowIndex));
@@ -784,11 +745,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected FloatVectorReader toNotNull() {
-            return new FloatVectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Float) {
                 return String.valueOf(getFloat());
@@ -816,11 +772,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newDouble(vector.get(rowIndex));
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected DoubleVectorReader toNotNull() {
-            return new DoubleVectorReader(vector, type, false);
         }
 
         @Override
@@ -873,11 +824,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newJsonDocument(getJsonDocument());
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected VarCharVectorReader toNotNull() {
-            return new VarCharVectorReader(vector, type, false);
         }
 
         @Override
@@ -936,11 +882,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
         }
 
         @Override
-        protected VarBinaryVectorReader toNotNull() {
-            return new VarBinaryVectorReader(vector, type, false);
-        }
-
-        @Override
         public String getNotNullValueAsString() {
             if (type == PrimitiveType.Bytes) {
                 return Hex.toHex(UnsafeByteOperations.unsafeWrap(getBytes()));
@@ -994,11 +935,6 @@ public abstract class ApacheArrowValueReader<T extends FieldVector> implements V
                 return PrimitiveValue.newUuid(getUuid());
             }
             throw error("getValue");
-        }
-
-        @Override
-        protected FixedSizeBinaryVectorReader toNotNull() {
-            return new FixedSizeBinaryVectorReader(vector, type, false);
         }
 
         @Override
