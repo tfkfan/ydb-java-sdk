@@ -224,9 +224,9 @@
                         <revapi.reporter.text>
                             <minSeverity>BREAKING</minSeverity>
                             <minCriticality>documented</minCriticality>
-                            <output>target/revapi-reports/${project.artifactId}-report.txt</output>
+                            <output>changes.txt</output>
                             <template>/config/revapi-report-template.ftl</template>
-                            <append>false</append>
+                            <append>true</append>
                             <keepEmptyFile>true</keepEmptyFile>
                         </revapi.reporter.text>
                     </analysisConfiguration>
