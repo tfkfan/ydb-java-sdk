@@ -16,9 +16,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java }}
           distribution: 'temurin'
-          cache: maven
+          cache: 'maven'
+          cache-dependency-path: |
+            sdk/pom.xml
+            sdk/bom/pom.xml
+            yc/pom.xml
+            jdbc/pom.xml
 
       - name: Checkout code
         uses: actions/checkout@v4
