@@ -13,26 +13,21 @@ jobs:
       pull-requests: write
       contents: read
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 8
           distribution: 'temurin'
           cache: 'maven'
-          cache-dependency-path: |
-            sdk/pom.xml
-            sdk/bom/pom.xml
-            yc/pom.xml
-            jdbc/pom.xml
-
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Build
         run: mvn -DskipTests -ntp install
 
       - name: Check broken API changes
-        run: set -o pipefail && mvn org.revapi:revapi-maven-plugin:report-aggregate -ntp
+        run: set -o pipefail && mvn org.revapi:revapi-maven-plugin:report-aggregate -DskipTests -ntp
 
       - name: Generate backward compatibility report
         run: |

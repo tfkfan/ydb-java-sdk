@@ -80,17 +80,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.revapi</groupId>
-                <artifactId>revapi-java</artifactId>
-                <version>0.28.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.revapi</groupId>
-                <artifactId>revapi-reporter-text</artifactId>
-                <version>${maven-revapi-plugin.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
